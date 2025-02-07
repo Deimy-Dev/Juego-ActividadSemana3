@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class JugadorController : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class JugadorController : MonoBehaviour
     //Inicializo el contador de coleccionables recogidos
     private int contador;
     //Inicializo variables para los textos
-    public TMP_Text textoContador, textoGanar;
+    public TMP_Text textoContador, textoGanar, textoNombre;
     //Declaro la variable pública velocidad para poder modificarla desde la Inspector window
     public float velocidad;
     // Use this for initialization
@@ -23,6 +24,7 @@ public class JugadorController : MonoBehaviour
         contador = 0;
         setTextoContador();
         textoGanar.text = "";
+        textoNombre.text = "Deimy Minaya 1-21-0568";
     }
 
     // Para que se sincronice con los frames de física del motor
@@ -50,6 +52,7 @@ public class JugadorController : MonoBehaviour
             //Actualizo elt exto del contador
             setTextoContador();
         }
+        
     }
     //Actualizo el texto del contador (O muestro el de ganar si las ha cogido todas)
     void setTextoContador()
@@ -58,7 +61,12 @@ public class JugadorController : MonoBehaviour
         if (contador >= 12)
         {
             textoGanar.text = "¡Ganaste!";
+            Invoke("VolverAlMenu", 5f); // Regresar al menú después de 5 segundos
         }
+    }
+    void VolverAlMenu()
+    {
+        SceneManager.LoadScene("MenuPrincipal"); // Regresa al menú principal
     }
 
 
